@@ -1,11 +1,32 @@
-name: Basic Workflow Dispatch Example
+name: Github actions with IAM role
 
 on:
+  push:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
-  deploy:
+  AssumeRole:
     runs-on: ubuntu-latest
+    # Only runs when the event is a 'push' (automated)
+    if: github.event_name == 'push'
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: ls -l
+        run: ls -l
+  
+  listFiles:
+    runs-on: ubuntu-latest
+    # Only runs when the event is 'workflow_dispatch' (manual trigger)
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: list
+        run: ls -lah

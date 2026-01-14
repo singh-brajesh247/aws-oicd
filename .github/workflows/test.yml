@@ -16,7 +16,7 @@ jobs:
       - name: Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.CI_IAM_ROLE }}
+          role-to-assume: ${{ secrets.IAM_ROLE }}
           role-session-name: github-actions-federation
           aws-region: ${{ secrets.AWS_REGION }}
           

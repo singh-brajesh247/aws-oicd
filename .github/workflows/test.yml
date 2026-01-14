@@ -23,6 +23,6 @@ jobs:
       - name: Deploy application via SSM
         run: |
           aws ssm send-command \
-            --instance-ids i-0123456789abcdef0 \
+            --instance-ids i-0f0ce7548145af848 i-0f8a340fbceaf515c \
             --document-name "AWS-RunShellScript" \
-            --parameters 'commands=echo "Healthy from ASG - version 30" > /var/www/html/index.html'
+            --parameters {"commands":[ "sudo echo \"Healthy from ASG - version 30\" > /var/www/html/index.html", "sudo systemctl restart httpd",]}'
